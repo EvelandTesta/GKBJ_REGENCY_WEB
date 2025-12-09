@@ -9,11 +9,10 @@ export default function Hero({ setActiveSection }: HeroProps) {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
-          src="https://picsum.photos/id/1024/1920/1080"
+          src="/img/hero.jpg"
           alt="Church sanctuary"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-blue-900/70"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
@@ -27,7 +26,7 @@ export default function Hero({ setActiveSection }: HeroProps) {
           Join us in worship, fellowship, and service as we build a stronger community of believers.
         </p>
         <a
-          href="about"
+          href="#about"
           className="inline-block px-8 py-3 bg-white text-blue-800 font-semibold rounded-full hover:bg-gray-100 transition-colors duration-300"
           onClick={() => setActiveSection("about")}
         >

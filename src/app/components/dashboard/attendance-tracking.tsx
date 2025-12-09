@@ -42,24 +42,24 @@ export default function AttendanceTracking() {
   }, [])
 
   const fetchAttendance = async () => {
-    try {
-      const response = await fetch("/api/attendance")
-      if (response.ok) {
-        const data = await response.json()
-        setAttendanceRecords(
-          data.map((record: any) => ({
-            id: record.id,
-            date: record.attended_date,
-            eventType: record.event_type,
-            attendees: record.attendees || [],
-            totalAttendance: record.total_attendance || 0,
-          })),
-        )
-      }
-    } catch (error) {
-      console.error("Error fetching attendance:", error)
+  try {
+    const response = await fetch("/api/attendance")
+    if (response.ok) {
+      const data = await response.json()
+      setAttendanceRecords(
+        data.map((record: any) => ({
+          id: record.id,
+          date: record.date,
+          eventType: record.eventType,
+          attendees: record.attendees || [],
+          totalAttendance: record.totalAttendance || 0,
+        })),
+      )
     }
+  } catch (error) {
+    console.error("Error fetching attendance:", error)
   }
+}
 
   const fetchMembers = async () => {
     try {
@@ -145,7 +145,7 @@ export default function AttendanceTracking() {
         </button>
       </div>
 
-      {/* Stats */}
+      {/* stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">

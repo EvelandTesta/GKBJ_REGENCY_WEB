@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { verifyToken } from "@/lib/auth"
 
-// Utility type guard untuk error Prisma
+
 function isPrismaError(error: unknown): error is { code: string } {
     return typeof error === "object" && error !== null && "code" in error
 }

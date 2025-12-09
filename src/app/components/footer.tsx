@@ -16,8 +16,14 @@ export default function Footer({ navItems, setActiveSection }: FooterProps) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <h3 className="text-2xl font-bold">GKBJ REGENCY</h3>
-            <p className="text-blue-200 mt-2">Building a community of faith, hope, and love.</p>
+            <h3 className="text-2xl font-bold">GKBJ REGENCY HEBAT</h3>
+            <ul className="text-blue-200 mt-2">
+              <li>H: Honoring GOD</li> 
+              <li>E: Enthusiastie</li>
+              <li>B: Bless to Bless </li>
+              <li>A: Authentie </li>
+              <li>T: Totality</li>
+            </ul>
           </div>
 
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
@@ -41,7 +47,7 @@ export default function Footer({ navItems, setActiveSection }: FooterProps) {
             <div>
               <h4 className="font-bold mb-2">Connect</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-blue-200 hover:text-white transition-colors duration-300">
+                <a href="https://www.facebook.com/gkbj.regency.7/  " className="text-blue-200 hover:text-white transition-colors duration-300" target="_blank" rel="noopener noreferrer">
                   <span className="sr-only">Facebook</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +63,7 @@ export default function Footer({ navItems, setActiveSection }: FooterProps) {
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>
                 </a>
-                <a href="#" className="text-blue-200 hover:text-white transition-colors duration-300">
+                <a href="https://www.instagram.com/gkbjregency/  " className="text-blue-200 hover:text-white transition-colors duration-300" target="_blank" rel="noopener noreferrer">
                   <span className="sr-only">Instagram</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +81,7 @@ export default function Footer({ navItems, setActiveSection }: FooterProps) {
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                   </svg>
                 </a>
-                <a href="#" className="text-blue-200 hover:text-white transition-colors duration-300">
+                <a href="https://www.youtube.com/@GKBJRegency  " className="text-blue-200 hover:text-white transition-colors duration-300" target="_blank" rel="noopener noreferrer">
                   <span className="sr-only">YouTube</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

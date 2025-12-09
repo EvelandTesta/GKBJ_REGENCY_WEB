@@ -1,6 +1,5 @@
--- Create database schema for GKBJ Regency Church Management System
 
--- Users table for authentication
+
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -11,13 +10,13 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Members table
+
 CREATE TABLE IF NOT EXISTS members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     age INTEGER,
     gender VARCHAR(20),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     phone VARCHAR(50),
     role VARCHAR(100) DEFAULT 'Member',
     address TEXT,
@@ -26,7 +25,7 @@ CREATE TABLE IF NOT EXISTS members (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Events table
+
 CREATE TABLE IF NOT EXISTS events (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -40,7 +39,7 @@ CREATE TABLE IF NOT EXISTS events (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Attendance table
+
 CREATE TABLE IF NOT EXISTS attendance (
     id SERIAL PRIMARY KEY,
     event_id INTEGER REFERENCES events(id) ON DELETE CASCADE,
@@ -51,7 +50,7 @@ CREATE TABLE IF NOT EXISTS attendance (
     UNIQUE(event_id, member_id, attended_date)
 );
 
--- Registration requests table
+
 CREATE TABLE IF NOT EXISTS registration_requests (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -68,7 +67,7 @@ CREATE TABLE IF NOT EXISTS registration_requests (
     processed_by INTEGER REFERENCES users(id)
 );
 
--- Quotes table
+
 CREATE TABLE IF NOT EXISTS quotes (
     id SERIAL PRIMARY KEY,
     quote_text TEXT NOT NULL,
@@ -78,7 +77,7 @@ CREATE TABLE IF NOT EXISTS quotes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create indexes for better performance
+
 CREATE INDEX IF NOT EXISTS idx_members_email ON members(email);
 CREATE INDEX IF NOT EXISTS idx_members_role ON members(role);
 CREATE INDEX IF NOT EXISTS idx_attendance_date ON attendance(attended_date);
@@ -88,10 +87,10 @@ CREATE INDEX IF NOT EXISTS idx_registration_status ON registration_requests(stat
 
 -- Insert default admin user (password: admin123)
 INSERT INTO users (email, password_hash, name, role) 
-VALUES ('admin@gkbjregency.org', '$2b$10$rQZ8kHWKtGKVQxvxHxHxHOuYxYxYxYxYxYxYxYxYxYxYxYxYxYxYx', 'Admin User', 'admin')
+VALUES ('123@gmail.com', '$2a$12$4F.b7qyPSeu.maWsFHTIhOY20Qva75mC1jHx59sKbx1o6N85UdY4e', 'Admin User', 'admin')
 ON CONFLICT (email) DO NOTHING;
 
--- Insert sample quotes
+
 INSERT INTO quotes (quote_text, author, scripture_reference) VALUES
 ('For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, to give you hope and a future.', 'Bible', 'Jeremiah 29:11'),
 ('Trust in the Lord with all your heart and lean not on your own understanding.', 'Bible', 'Proverbs 3:5'),

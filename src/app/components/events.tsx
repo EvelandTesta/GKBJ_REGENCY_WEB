@@ -13,48 +13,49 @@ export interface Event {
   time: string
 }
 
+// kg dibolehin pake gambar gereja Pak 
 export default function Events({ setActiveSection }: EventsProps) {
   const events: Event[] = [
     {
-      title: "Sunday Worship Service",
+      title: "Ibadah Umum",
       description: "Join us for our weekly worship service with inspiring messages and uplifting music.",
-      image: "https://picsum.photos/id/1026/600/400",
+      image: "img/umum.jpg",
       date: "Every Sunday",
-      time: "10:00 AM",
+      time: "09:00 AM",
     },
     {
-      title: "Youth Fellowship",
+      title: "Kids Of God",
+      description: "Fun and engaging programs designed to teach children about God's love.",
+      image: "img/kog.jpg",
+      date: "Every Sunday",
+      time: "09:00 AM",
+    },
+    {
+      title: "Youth Care Community",
       description: "A vibrant community for young people to grow in faith and friendship.",
-      image: "https://picsum.photos/id/1027/600/400",
-      date: "Every Friday",
-      time: "7:00 PM",
+      image: "img/YCC.jpg",
+      date: "Every Saturday",
+      time: "06:30 PM",
     },
     {
-      title: "Bible Study Group",
-      description: "Deep dive into God's word with our weekly Bible study sessions.",
-      image: "https://picsum.photos/id/1028/600/400",
-      date: "Every Wednesday",
-      time: "7:30 PM",
-    },
-    {
-      title: "Community Outreach",
-      description: "Serving our local community through various charitable activities.",
-      image: "https://picsum.photos/id/1029/600/400",
+      title: "Café Cell",
+      description: "At Cafe Cell, every cup of coffee accompanies prayers that unite hearts in community.",
+      image: "img/cafecell.jpg",
       date: "Monthly",
-      time: "9:00 AM",
+      time: "06:30 AM",
     },
     {
-      title: "Prayer Meeting",
+      title: "Persekutuan Doa",
       description: "Come together in prayer for our church, community, and world.",
-      image: "https://picsum.photos/id/1030/600/400",
-      date: "Every Tuesday",
+      image: "img/doa.jpg",
+      date: "Every Friday",
       time: "6:30 PM",
     },
     {
-      title: "Children's Ministry",
-      description: "Fun and engaging programs designed to teach children about God's love.",
-      image: "https://picsum.photos/id/1031/600/400",
-      date: "Every Sunday",
+      title: "Big Events",
+      description: "Fun and engaging programs designed to serving our local community.",
+      image: "img/big.jpg",
+      date: "Yearly",
       time: "10:00 AM",
     },
   ]

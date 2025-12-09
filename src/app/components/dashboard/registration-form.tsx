@@ -169,7 +169,6 @@ export default function RegistrationForm() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">Registration Management</h2>
@@ -184,7 +183,6 @@ export default function RegistrationForm() {
         </button>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <div className="flex items-center justify-between">
@@ -219,7 +217,6 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      {/* Registrations Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">Recent Registrations</h3>
@@ -294,7 +291,6 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      {/* Public Registration Form Modal */}
       {showPublicForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">

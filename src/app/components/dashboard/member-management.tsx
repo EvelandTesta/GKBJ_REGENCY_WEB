@@ -15,7 +15,6 @@ interface Member {
 }
 
 export default function MemberManagement() {
-  // Replace the useState for members with:
   const [members, setMembers] = useState<Member[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -41,14 +40,14 @@ export default function MemberManagement() {
     return matchesSearch && matchesRole
   })
 
-  // Add useEffect to fetch members:
+
   useEffect(() => {
     fetchMembers()
   }, [])
 
   const fetchMembers = async () => {
     try {
-      const response = await fetch("/api/members")
+      const response = await fetch("/api/member")
       if (response.ok) {
         const data = await response.json()
         setMembers(
@@ -71,10 +70,10 @@ export default function MemberManagement() {
     }
   }
 
-  // Replace handleAddMember function:
+
   const handleAddMember = async () => {
     try {
-      const response = await fetch("/api/members", {
+      const response = await fetch("/api/member", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,11 +103,11 @@ export default function MemberManagement() {
     }
   }
 
-  // Replace handleEditMember function:
+
   const handleEditMember = async () => {
     if (editingMember) {
       try {
-        const response = await fetch(`/api/members/${editingMember.id}`, {
+        const response = await fetch(`/api/member/${editingMember.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -140,11 +139,11 @@ export default function MemberManagement() {
     }
   }
 
-  // Replace handleDeleteMember function:
+
   const handleDeleteMember = async (id: number) => {
     if (confirm("Are you sure you want to delete this member?")) {
       try {
-        const response = await fetch(`/api/members/${id}`, {
+        const response = await fetch(`/api/member/${id}`, {
           method: "DELETE",
         })
 
@@ -199,7 +198,7 @@ export default function MemberManagement() {
     a.click()
   }
 
-  // Add loading state to the render:
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -225,7 +224,7 @@ export default function MemberManagement() {
         </button>
       </div>
 
-      {/* Search and Filter */}
+      {/* search and filter */}
       <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
@@ -263,7 +262,7 @@ export default function MemberManagement() {
         </div>
       </div>
 
-      {/* Members Table */}
+      {/* members table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -327,7 +326,7 @@ export default function MemberManagement() {
         </div>
       </div>
 
-      {/* Add/Edit Member Modal */}
+      {/* add/edit member modal */}
       {showAddForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">

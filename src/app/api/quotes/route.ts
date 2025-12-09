@@ -1,11 +1,10 @@
-// app/api/quote/route.ts
+
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 
-// GET daily quote
+
 export async function GET() {
   try {
-    // Ambil satu quote yang aktif secara acak
     const quotes = await prisma.quote.findMany({
       where: {
         isActive: true,
@@ -17,7 +16,7 @@ export async function GET() {
       },
       take: 1,
       orderBy: {
-        id: "asc", // Prisma tidak punya RANDOM() di semua provider, gunakan workaround
+        id: "asc", 
       },
     })
 

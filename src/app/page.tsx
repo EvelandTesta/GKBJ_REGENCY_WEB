@@ -12,7 +12,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home")
   const [scrolled, setScrolled] = useState(false)
 
-  // Handle scroll to show navbar background
+  // Handlescroll 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -28,13 +28,12 @@ export default function Home() {
     }
   }, [])
 
-  // Navigation items
+
   const navItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About Us" },
-    { id: "events", label: "Events" },
-    { id: "ministries", label: "Ministries" },
-    { id: "contact", label: "Contact" },
+    { id: "#home", label: "Home" },
+    { id: "#about", label: "About Us" },
+    { id: "#events", label: "Events" },
+    { id: "#contact", label: "Contact" },
     { id: "login", label: "Login"}
   ]
 

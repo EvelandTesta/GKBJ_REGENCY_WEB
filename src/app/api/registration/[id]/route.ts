@@ -1,9 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { sql } from "@/lib/db"
+import { prisma } from "@/lib/prisma"
 import { verifyToken } from "@/lib/auth"
 
-// PUT update registration status
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+
+function isPrismaError(error: unknown): error is { code: string } {
+  return typeof error === "object" && error !== null && "code" in error
+}
+
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const token = request.cookies.get("auth-token")?.value
     const user = verifyToken(token || "")
@@ -14,37 +22,60 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const { id } = await params
     const { status } = await request.json()
 
-    const result = await sql`
-      UPDATE registration_requests 
-      SET status = ${status}, processed_at = CURRENT_TIMESTAMP, processed_by = ${user.id}
-      WHERE id = ${id}
-      RETURNING *
-    `
+    const registrationId = parseInt(id)
 
-    if (result.length === 0) {
-      return NextResponse.json({ error: "Registration not found" }, { status: 404 })
-    }
+    // Update registrasi
+    const registration = await prisma.registrationRequest.update({
+      where: { id: registrationId },
+      data: {
+        status,
+        processedAt: new Date(),
+        processedById: user.id,
+      },
+    })
 
-    // If approved, create member record
+
     if (status === "approved") {
-      const registration = result[0]
-      await sql`
-        INSERT INTO members (name, age, gender, email, phone, address, role)
-        VALUES (${registration.name}, ${registration.age}, ${registration.gender}, 
-                ${registration.email}, ${registration.phone}, ${registration.address}, 'Member')
-        ON CONFLICT (email) DO NOTHING
-      `
+      await prisma.member.upsert({
+        where: { email: registration.email },
+        update: {
+          name: registration.name,
+          age: registration.age,
+          gender: registration.gender,
+          phone: registration.phone,
+          address: registration.address,
+        },
+        create: {
+          name: registration.name,
+          age: registration.age,
+          gender: registration.gender,
+          email: registration.email,
+          phone: registration.phone,
+          address: registration.address,
+          role: "Member",
+        },
+      })
     }
 
-    return NextResponse.json(result[0])
+    return NextResponse.json(registration)
   } catch (error) {
     console.error("Error updating registration:", error)
+
+    if (isPrismaError(error)) {
+      if (error.code === "P2025") {
+        return NextResponse.json({ error: "Registration not found" }, { status: 404 })
+      }
+    }
+
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
 
 // DELETE registration
-export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const token = request.cookies.get("auth-token")?.value
     if (!token || !verifyToken(token)) {
@@ -52,19 +83,23 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     }
 
     const { id } = await params
+    const registrationId = parseInt(id)
 
-    const result = await sql`
-      DELETE FROM registration_requests WHERE id = ${id}
-      RETURNING id
-    `
 
-    if (result.length === 0) {
-      return NextResponse.json({ error: "Registration not found" }, { status: 404 })
-    }
+    const deleted = await prisma.registrationRequest.delete({
+      where: { id: registrationId },
+    })
 
     return NextResponse.json({ message: "Registration deleted successfully" })
   } catch (error) {
     console.error("Error deleting registration:", error)
+
+    if (isPrismaError(error)) {
+      if (error.code === "P2025") {
+        return NextResponse.json({ error: "Registration not found" }, { status: 404 })
+      }
+    }
+
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

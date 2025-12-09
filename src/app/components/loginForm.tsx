@@ -6,13 +6,13 @@ import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-// 🔹 Definisikan skema validasi dengan Zod
+
 const loginSchema = z.object({
     email: z.string().min(1, "Email is required").email("Invalid email address"),
     password: z.string().min(1, "Password is required"),
 })
 
-// 🔹 Tipe dari skema
+
 type LoginFormInputs = z.infer<typeof loginSchema>
 
 export default function LoginForm() {
@@ -46,10 +46,10 @@ export default function LoginForm() {
                 return
             }
 
-            // 🔐 Simpan token di cookie
+
             document.cookie = `auth-token=${result.token}; path=/`
 
-            // 🚀 Redirect ke dashboard
+
             router.push("/dashboard")
         } catch (err) {
             setServerError("Something went wrong. Please try again.")
@@ -70,7 +70,7 @@ export default function LoginForm() {
                     {...register("email")}
                     className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2"
                 />
-                {/* ✅ Akses error.message dengan aman */}
+
                 {errors.email?.message && (
                     <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                 )}
@@ -87,18 +87,18 @@ export default function LoginForm() {
                     {...register("password")}
                     className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2"
                 />
-                {/* ✅ Akses error.message dengan aman */}
+
                 {errors.password?.message && (
                     <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
                 )}
             </div>
 
-            {/* Server Error Message */}
+
             {serverError && (
                 <p className="text-red-500 text-sm mt-2">{serverError}</p>
             )}
 
-            {/* Submit Button */}
+
             <button
                 type="submit"
                 disabled={isSubmitting}

@@ -1,4 +1,4 @@
-// prisma/seed.ts
+
 import { prisma } from "@/lib/prisma"
 
 const bcrypt = require('bcrypt')

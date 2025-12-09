@@ -35,7 +35,7 @@ export default function Calendar() {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("/api/events")
+      const response = await fetch("/api/event")
       if (response.ok) {
         const data = await response.json()
         setEvents(
@@ -65,12 +65,12 @@ export default function Calendar() {
 
     const days = []
 
-    // Add empty cells for days before the first day of the month
+
     for (let i = 0; i < startingDayOfWeek; i++) {
       days.push(null)
     }
 
-    // Add days of the month
+
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(day)
     }
@@ -86,7 +86,7 @@ export default function Calendar() {
 
   const handleAddEvent = async () => {
     try {
-      const response = await fetch("/api/events", {
+      const response = await fetch("/api/event", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ export default function Calendar() {
   const handleEditEvent = async () => {
     if (selectedEvent) {
       try {
-        const response = await fetch(`/api/events/${selectedEvent.id}`, {
+        const response = await fetch(`/api/event/${selectedEvent.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -154,7 +154,7 @@ export default function Calendar() {
   const handleDeleteEvent = async (id: number) => {
     if (confirm("Are you sure you want to delete this event?")) {
       try {
-        const response = await fetch(`/api/events/${id}`, {
+        const response = await fetch(`/api/event/${id}`, {
           method: "DELETE",
         })
 
@@ -225,7 +225,6 @@ export default function Calendar() {
 
       {/* Calendar */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-        {/* Calendar Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <button onClick={() => navigateMonth(-1)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
             <ChevronLeft className="h-5 w-5" />
@@ -238,7 +237,6 @@ export default function Calendar() {
           </button>
         </div>
 
-        {/* Day Names */}
         <div className="grid grid-cols-7 border-b border-gray-200">
           {dayNames.map((day) => (
             <div key={day} className="px-4 py-3 text-center text-sm font-medium text-gray-500 bg-gray-50">
@@ -247,7 +245,6 @@ export default function Calendar() {
           ))}
         </div>
 
-        {/* Calendar Grid */}
         <div className="grid grid-cols-7">
           {getDaysInMonth(currentDate).map((day, index) => {
             const dayEvents = getEventsForDate(day)

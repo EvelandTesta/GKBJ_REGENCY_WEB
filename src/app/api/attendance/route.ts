@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { verifyToken } from "@/lib/auth"
 
-// GET attendance records
+
 export async function GET(request: NextRequest) {
   try {
     const token = request.cookies.get("auth-token")?.value
@@ -20,30 +20,30 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    // Get attendee names for each attendance record
-    const attendanceWithNames = await Promise.all(
-      attendance.map(async (record) => {
-        const attendees = await prisma.attendance.findMany({
-          where: {
-            attendedDate: record.attendedDate,
-            eventType: record.eventType,
-          },
-          include: {
-            member: {
-              select: { name: true },
-            },
-          },
-        })
 
-        return {
-          id: `${record.attendedDate.toISOString()}-${record.eventType}`,
-          date: record.attendedDate.toISOString().split("T")[0],
-          eventType: record.eventType,
-          totalAttendance: record._count.memberId,
-          attendees: attendees.map((a) => a.member.name),
-        }
-      }),
-    )
+    const attendanceWithNames = await Promise.all(
+  attendance.map(async (record) => {
+    const dateStr = record.attendedDate.toISOString().split("T")[0]
+
+    const attendees = await prisma.attendance.findMany({
+      where: {
+        attendedDate: record.attendedDate,
+        eventType: record.eventType,
+      },
+      include: {
+        member: true,
+      },
+    })
+
+    return {
+      id: `${record.attendedDate.getTime()}-${record.eventType}`, // gunakan timestamp untuk id unik
+      date: dateStr,
+      eventType: record.eventType,
+      totalAttendance: attendees.length,
+      attendees: attendees.map((a) => a.member?.name || "Unknown"),
+    }
+  })
+)
 
     return NextResponse.json(attendanceWithNames)
   } catch (error) {
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST new attendance record
+
 export async function POST(request: NextRequest) {
   try {
     const token = request.cookies.get("auth-token")?.value
@@ -67,7 +67,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Date, event type, and member IDs are required" }, { status: 400 })
     }
 
-    // Create event first
     const event = await prisma.event.create({
       data: {
         title: eventType,
@@ -78,7 +77,6 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Create attendance records
     const attendanceRecords = await prisma.attendance.createMany({
       data: memberIds.map((memberId: number) => ({
         eventId: event.id,

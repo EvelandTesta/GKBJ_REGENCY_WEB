@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import type { Event } from "./events"
 import { Calendar, Clock } from "lucide-react"
@@ -33,7 +34,7 @@ export default function EventCard({ event, setActiveSection }: EventCardProps) {
         </div>
 
         <a
-          href="contact"
+          href="#contact"
           className="text-blue-800 font-semibold hover:text-blue-600 transition-colors duration-300 inline-flex items-center"
           onClick={() => setActiveSection("contact")}
         >

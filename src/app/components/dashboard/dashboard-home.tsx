@@ -11,7 +11,7 @@ export default function DashboardHome() {
     { label: "New Registrations", value: "12", icon: Heart, color: "bg-pink-500" },
   ]
 
-  // Add state and useEffect for quote:
+
   const [todayQuote, setTodayQuote] = useState("")
 
   useEffect(() => {
@@ -35,13 +35,13 @@ export default function DashboardHome() {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
+      {/* Header */}
       <div>
         <h2 className="text-3xl font-bold text-gray-900">Dashboard Overview</h2>
-        <p className="text-gray-600">Welcome back! Here's what's happening at GKBJ Regency.</p>
+        <p className="text-gray-600">Welcome back! Here&apos;s what&apos;s happening at GKBJ Regency.</p>
       </div>
 
-      {/* Stats Grid */}
+      {/* stats grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => {
           const Icon = stat.icon
@@ -67,7 +67,7 @@ export default function DashboardHome() {
         <blockquote className="text-lg italic leading-relaxed">{todayQuote}</blockquote>
       </div>
 
-      {/* Recent Activity */}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Registrations</h3>

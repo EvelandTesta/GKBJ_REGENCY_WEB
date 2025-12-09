@@ -27,10 +27,8 @@ export default function Login() {
       const data = await response.json()
 
       if (response.ok) {
-        // ✅ Simpan token di cookie
         document.cookie = `auth-token=${data.token}; path=/`
 
-        // ✅ Redirect ke dashboard
         router.push("/dashboard")
       } else {
         setError(data.error || "Login failed")
@@ -43,10 +41,9 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Side - Login Form */}
+
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-md w-full space-y-8">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
             <Church className="h-8 w-8 text-blue-800" />
             <span className="text-2xl font-bold text-blue-800">GKBJ REGENCY</span>
@@ -56,14 +53,14 @@ export default function Login() {
           <div>
             <h2 className="text-3xl font-bold text-gray-900">Sign in</h2>
             <p className="mt-2 text-sm text-gray-600">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a href="#" className="font-medium text-blue-800 hover:text-blue-600 transition-colors">
                 Contact Admin
               </a>
             </p>
           </div>
 
-          {/* Error Message */}
+
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
@@ -123,14 +120,12 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Forgot Password */}
             <div className="text-left">
               <a href="#" className="text-sm font-medium text-blue-800 hover:text-blue-600 transition-colors">
                 Forgot password?
               </a>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-blue-800 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800 transition-colors duration-300"
@@ -138,7 +133,6 @@ export default function Login() {
               Sign in
             </button>
 
-            {/* Demo Credentials */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
@@ -152,8 +146,8 @@ export default function Login() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-blue-800">
-                    Use <span className="font-semibold">member@gkbjregency.org</span> with password{" "}
-                    <span className="font-semibold">Faith2024!</span>
+                    Use <span className="font-semibold">123@gmail.com</span> with password{" "}
+                    <span className="font-semibold">admin123</span>
                   </p>
                 </div>
               </div>
@@ -162,11 +156,10 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right Side - Welcome Section */}
+
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
         <div className="flex items-center justify-center w-full px-12">
           <div className="max-w-md text-center">
-            {/* Welcome Text */}
             <h1 className="text-4xl font-bold text-white mb-4">
               Welcome to{" "}
               <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
@@ -177,7 +170,6 @@ export default function Login() {
               A spiritual platform designed for our church community with member management and event coordination.
             </p>
 
-            {/* Feature Preview Card */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <div className="bg-white rounded-xl p-4 mb-4">
                 <div className="flex items-center space-x-3 mb-3">
@@ -197,7 +189,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Decorative Elements */}
             <div className="absolute top-20 right-20 w-32 h-32 bg-yellow-500/20 rounded-full blur-xl"></div>
             <div className="absolute bottom-20 left-20 w-24 h-24 bg-orange-500/20 rounded-full blur-xl"></div>
           </div>

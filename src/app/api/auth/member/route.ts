@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { verifyToken } from "@/lib/auth"
 
-// GET all members
+
 export async function GET(request: NextRequest) {
   try {
     const token = request.cookies.get("auth-token")?.value
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    // Menggunakan Prisma ORM
+
     const members = await prisma.member.findMany({
       orderBy: {
         createdAt: "desc",
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST new member
+
 export async function POST(request: NextRequest) {
   try {
     const token = request.cookies.get("auth-token")?.value
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Name and email are required" }, { status: 400 })
     }
 
-    // Menggunakan Prisma ORM
+
     const newMember = await prisma.member.create({
       data: {
         name,

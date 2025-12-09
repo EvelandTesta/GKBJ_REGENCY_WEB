@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { verifyToken } from "@/lib/auth"
 
-// GET all events
+
 export async function GET(request: NextRequest) {
     try {
         const token = request.cookies.get("auth-token")?.value
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     }
 }
 
-// POST new event
+
 export async function POST(request: NextRequest) {
     try {
         const token = request.cookies.get("auth-token")?.value

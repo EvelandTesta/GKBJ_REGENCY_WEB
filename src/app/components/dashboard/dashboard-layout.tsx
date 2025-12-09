@@ -54,7 +54,7 @@ export default function DashboardLayout({ children, activeTab, setActiveTab }: D
       </header>
 
       <div className="flex">
-        {/* Sidebar */}
+        {/* sidebar */}
         <aside className="w-64 bg-white shadow-sm min-h-screen">
           <nav className="p-4">
             <ul className="space-y-2">
@@ -80,7 +80,7 @@ export default function DashboardLayout({ children, activeTab, setActiveTab }: D
           </nav>
         </aside>
 
-        {/* Main Content */}
+        {/* nain content */}
         <main className="flex-1 p-6">{children}</main>
       </div>
     </div>

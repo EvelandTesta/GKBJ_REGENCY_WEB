@@ -30,14 +30,16 @@ export default function Navigation({ navItems, activeSection, setActiveSection, 
           <span className="text-2xl font-bold text-blue-800">GKBJ REGENCY</span>
         </div>
 
-        {/* Desktop Nav */}
+        {/* desktop navigation */}
         <ul className="hidden md:flex space-x-8">
           {navItems.map((item) => (
             <li key={item.id}>
               <a
                 href={`${item.id}`}
-                className={`font-medium hover:text-blue-600 transition-colors duration-300 ${
-                  activeSection === item.id ? "text-blue-800 border-b-2 border-blue-800" : "text-gray-600"
+                className={`font-medium transition-colors duration-300 ${
+                  activeSection === item.id 
+                    ? "text-blue-800 border-b-2 border-blue-800" 
+                    : "text-blue-800 hover:text-blue-400"
                 }`}
                 onClick={() => setActiveSection(item.id)}
               >
@@ -47,7 +49,7 @@ export default function Navigation({ navItems, activeSection, setActiveSection, 
           ))}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* mobile menu Button */}
         <button className="md:hidden text-blue-800 focus:outline-none" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +67,7 @@ export default function Navigation({ navItems, activeSection, setActiveSection, 
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg mt-2 pb-4 px-4">
           <ul className="flex flex-col space-y-4">
