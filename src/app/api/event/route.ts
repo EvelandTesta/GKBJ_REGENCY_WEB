@@ -46,12 +46,18 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Title, date, and time are required" }, { status: 400 })
         }
 
+        const fullDateTime = new Date(`${date}T${time}:00`);
+
+        if (isNaN(fullDateTime.getTime())) {
+            return NextResponse.json({ error: "Invalid date or time format" }, { status: 400 });
+        }
+
         const event = await prisma.event.create({
             data: {
                 title,
                 description: description || null,
-                eventDate: new Date(date),
-                eventTime: time,
+                eventDate: new Date(date),      
+                eventTime: fullDateTime,        
                 location: location || null,
                 eventType: type || "Service",
                 createdById: user.id,
