@@ -12,6 +12,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
     const { id } = await params
     const { title, description, date, time, location, type } = await request.json()
+    const fullDateTime = new Date(`${date}T${time}:00`);
 
     const event = await prisma.event.update({
       where: { id: Number.parseInt(id) },
@@ -19,7 +20,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
         title,
         description: description || null,
         eventDate: new Date(date),
-        eventTime: time,
+        eventTime: fullDateTime,
         location: location || null,
         eventType: type || "Service",
       },
